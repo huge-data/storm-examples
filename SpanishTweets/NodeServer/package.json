@@ -1,0 +1,18 @@
+{
+  "name": "GeoTweets",
+  "subdomain": "GeoTweets",
+  "author": "Mario Cerdan",
+  "scripts": {
+    "start": "server.js"
+  },
+  "version": "0.0.3-1",
+  "engines": {
+    "node": ">= 0.8.x"
+  },
+  "dependencies": {
+    "socket.io": "latest",
+    "node-static": "latest",
+    "util":"latest", 
+    "redis":"latest"
+   }
+}
