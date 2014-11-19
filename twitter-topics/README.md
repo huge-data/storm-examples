@@ -1,4 +1,2 @@
-twitterTrendStormTBDA
-=====================
 
-implementacion inicial trend topic con storm (Data Streams)
+# Twitter实时话题统计
