@@ -1,10 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.misi.tbda.dataStreams</groupId>
-	<artifactId>twitterTrendTopics</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>twitterTrendTopics</name>
+
+	<groupId>zx.soft</groupId>
+	<artifactId>twitter-topics</artifactId>
+	<version>1.0.0</version>
+	<name>Twitter Topics</name>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -25,12 +27,21 @@
 			<id>clojars.org</id>
 			<url>http://clojars.org/repo</url>
 		</repository>
+		<repository>
+			<id>twitter4j.org</id>
+			<name>twitter4j.org Repository</name>
+			<url>http://twitter4j.org/maven2</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
 	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.twitter</groupId>
-			<artifactId>hbc-core</artifactId> <!-- or hbc-twitter4j -->
-			<version>1.4.1-SNAPSHOT</version> <!-- or whatever the latest version is -->
+			<artifactId>hbc-core</artifactId>
+			<version>2.2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -58,4 +69,5 @@
 			<version>2.2.2</version>
 		</dependency>
 	</dependencies>
+
 </project>

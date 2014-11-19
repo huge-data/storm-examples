@@ -30,7 +30,6 @@ import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
 import twitter4j.auth.AccessToken;
 import twitter4j.conf.ConfigurationBuilder;
-
 import backtype.storm.Config;
 import backtype.storm.spout.SpoutOutputCollector;
 import backtype.storm.task.TopologyContext;
@@ -52,8 +51,8 @@ public class TwitterSampleSpout extends BaseRichSpout {
 	String accessTokenSecret;
 	String[] keyWords;
 
-	public TwitterSampleSpout(String consumerKey, String consumerSecret,
-			String accessToken, String accessTokenSecret, String[] keyWords) {
+	public TwitterSampleSpout(String consumerKey, String consumerSecret, String accessToken, String accessTokenSecret,
+			String[] keyWords) {
 		this.consumerKey = consumerKey;
 		this.consumerSecret = consumerSecret;
 		this.accessToken = accessToken;
@@ -65,9 +64,9 @@ public class TwitterSampleSpout extends BaseRichSpout {
 		// TODO Auto-generated constructor stub
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
-	public void open(Map conf, TopologyContext context,
-			SpoutOutputCollector collector) {
+	public void open(Map conf, TopologyContext context, SpoutOutputCollector collector) {
 		queue = new LinkedBlockingQueue<Status>(1000);
 		_collector = collector;
 
@@ -75,7 +74,7 @@ public class TwitterSampleSpout extends BaseRichSpout {
 
 			@Override
 			public void onStatus(Status status) {
-			
+
 				queue.offer(status);
 			}
 
@@ -103,15 +102,14 @@ public class TwitterSampleSpout extends BaseRichSpout {
 
 		};
 
-		TwitterStream twitterStream = new TwitterStreamFactory(
-				new ConfigurationBuilder().setJSONStoreEnabled(true).build())
-				.getInstance();
+		TwitterStream twitterStream = new TwitterStreamFactory(new ConfigurationBuilder().setJSONStoreEnabled(true)
+				.build()).getInstance();
 
 		twitterStream.addListener(listener);
 		twitterStream.setOAuthConsumer(consumerKey, consumerSecret);
 		AccessToken token = new AccessToken(accessToken, accessTokenSecret);
 		twitterStream.setOAuthAccessToken(token);
-		
+
 		if (keyWords.length == 0) {
 
 			twitterStream.sample();
@@ -132,7 +130,6 @@ public class TwitterSampleSpout extends BaseRichSpout {
 			Utils.sleep(50);
 		} else {
 			_collector.emit(new Values(ret));
-
 		}
 	}
 
