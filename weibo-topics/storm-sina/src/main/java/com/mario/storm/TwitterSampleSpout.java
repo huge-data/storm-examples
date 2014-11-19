@@ -24,17 +24,15 @@ import backtype.storm.utils.Utils;
 
 import com.mario.utils.Constants;
 
-/**
- * Reads Spain Tweets using the twitter4j library.
- * @author Mario
- */
-@SuppressWarnings({ "rawtypes", "serial" })
 public class TwitterSampleSpout extends BaseRichSpout {
+
+	private static final long serialVersionUID = 1072155965228158453L;
 
 	private SpoutOutputCollector collector;
 	private LinkedBlockingQueue<Status> queue;
 	private TwitterStream twitterStream;
 
+	@SuppressWarnings("rawtypes")
 	public void open(Map conf, TopologyContext context, SpoutOutputCollector collector) {
 		queue = new LinkedBlockingQueue<Status>(2000);
 		this.collector = collector;

@@ -12,10 +12,10 @@ import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
-/**
- * Receives tweets and emits its words over a certain length.
- */
 public class WordSplitterBolt extends BaseRichBolt {
+
+	private static final long serialVersionUID = 6284536822289357622L;
+
 	private final int minWordLength;
 
 	private OutputCollector collector;
@@ -24,6 +24,7 @@ public class WordSplitterBolt extends BaseRichBolt {
 		this.minWordLength = minWordLength;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public void prepare(Map map, TopologyContext topologyContext, OutputCollector collector) {
 		this.collector = collector;
 	}
@@ -44,4 +45,5 @@ public class WordSplitterBolt extends BaseRichBolt {
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
 		declarer.declare(new Fields("lang", "word", "loc"));
 	}
+
 }

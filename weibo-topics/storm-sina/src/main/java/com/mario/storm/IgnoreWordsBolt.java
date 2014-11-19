@@ -20,13 +20,17 @@ import backtype.storm.tuple.Values;
  */
 public class IgnoreWordsBolt extends BaseRichBolt {
 
+	private static final long serialVersionUID = -1943757209926130719L;
+
 	private final Set<String> IGNORE_LIST = new HashSet<String>(Arrays.asList(new String[] { "http", "the", "you",
 			"que", "and", "for", "that", "like", "have", "this", "just", "with", "all", "get", "about", "can", "was",
 			"not", "your", "but", "are", "one", "what", "out", "when", "get", "lol", "now", "para", "por", "want",
 			"will", "know", "good", "from", "las", "don", "people", "got", "why", "con", "time", "would", "jajaja",
 			"segun", "jaja", "xD", "no", "si" }));
+
 	private OutputCollector collector;
 
+	@SuppressWarnings("rawtypes")
 	public void prepare(Map map, TopologyContext topologyContext, OutputCollector collector) {
 		this.collector = collector;
 	}

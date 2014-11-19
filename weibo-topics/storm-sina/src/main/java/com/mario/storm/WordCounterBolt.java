@@ -16,11 +16,10 @@ import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseRichBolt;
 import backtype.storm.tuple.Tuple;
 
-/**
- * Keeps stats on word count, calculates and logs top words every X second to stdout and top list every Y seconds,
- * @author mario
- */
 public class WordCounterBolt extends BaseRichBolt {
+
+	private static final long serialVersionUID = -5085115016664687971L;
+
 	private static final Logger logger = LoggerFactory.getLogger(WordCounterBolt.class);
 	/** Number of seconds before the top list will be logged to stdout. */
 	private final long logIntervalSec;
@@ -41,6 +40,7 @@ public class WordCounterBolt extends BaseRichBolt {
 		this.topListSize = topListSize;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public void prepare(Map map, TopologyContext topologyContext, OutputCollector collector) {
 		counter = new HashMap<String, Long>();
 		location = new HashMap<String, GeoLocation>();
@@ -119,4 +119,5 @@ public class WordCounterBolt extends BaseRichBolt {
 			lastClearTime = now;
 		}
 	}
+
 }

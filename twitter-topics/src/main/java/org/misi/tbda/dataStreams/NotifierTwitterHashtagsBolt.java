@@ -1,7 +1,5 @@
 package org.misi.tbda.dataStreams;
 
-
-
 import java.net.URI;
 import java.util.Map;
 
@@ -13,10 +11,11 @@ import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseBasicBolt;
 import backtype.storm.tuple.Tuple;
 
-public class NotifierTwitterHashtagsBolt extends BaseBasicBolt{
+public class NotifierTwitterHashtagsBolt extends BaseBasicBolt {
 
-	private static final long serialVersionUID = 1L;
-	NotifierWebSocket  notifierWebSocket;
+	private static final long serialVersionUID = -2911751285488777374L;
+
+	NotifierWebSocket notifierWebSocket;
 	String clientname = "trendTopicNotifier";
 	String protocol = "ws";
 	String host = "localhost";
@@ -24,31 +23,29 @@ public class NotifierTwitterHashtagsBolt extends BaseBasicBolt{
 	String serverlocation = protocol + "://" + host + ":" + port;
 	URI uri = null;
 
-	
-	
 	@Override
 	public void cleanup() {
-		
+		//
 	}
- 
+
 	@Override
 	public void execute(Tuple input, BasicOutputCollector collector) {
 		String hashtag = (String) input.getValueByField("hashtag");
 		String hashtagFrecuency = (String) input.getValueByField("frequencyValue");
-	    notifierWebSocket.send(hashtag +"-"+hashtagFrecuency);
-	     
+		notifierWebSocket.send(hashtag + "-" + hashtagFrecuency);
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void prepare(Map stormConf, TopologyContext context) {
-		uri = URI.create( serverlocation + "/twitterTrendTopicsFrontEnd/dataStream?clientName=" + clientname );
+		uri = URI.create(serverlocation + "/twitterTrendTopicsFrontEnd/dataStream?clientName=" + clientname);
 		notifierWebSocket = new NotifierWebSocket();
 		notifierWebSocket.connect(uri.toString());
-		
 	}
 
 	@Override
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
+		//
 	}
 
 }

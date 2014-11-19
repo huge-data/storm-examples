@@ -7,8 +7,9 @@ import twitter4j.HashtagEntity;
 import twitter4j.Status;
 import backtype.storm.tuple.Values;
 
-@SuppressWarnings("serial")
 public class HashtagExtractor extends BaseFunction {
+
+	private static final long serialVersionUID = -3408773948564338830L;
 
 	@Override
 	public void execute(TridentTuple tuple, TridentCollector collector) {
@@ -18,4 +19,5 @@ public class HashtagExtractor extends BaseFunction {
 			collector.emit(new Values(hashtag.getText()));
 		}
 	}
+
 }
